@@ -8,9 +8,9 @@ const Footer = () => {
             <Image src={assets.logo_light} alt='' width={120} />
             <p className='text-sm text-white'>All rights reserved. Copyright @blogger</p>
             <div className='flex'>
-                <Image src={assets.facebook_icon} alt='' width-40/>
-                <Image src={assets.twitter_icon} alt='' width-40/>
-                <Image src={assets.googleplus_icon} alt='' width-40/>
+                <Image src={assets.facebook_icon.png} alt='' width={40}/>
+                <Image src={assets.twitter_icon.png} alt='' width={40}/>
+                <Image src={assets.googleplus_icon.png} alt='' width={40}/>
             </div>
         </div>
     );
