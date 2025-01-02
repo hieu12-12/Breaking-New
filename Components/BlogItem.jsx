@@ -16,7 +16,7 @@ const BlogItem = ({ title, description, category, image, id }) => {
         <p className="mb-3 text-sm tracking-tight text-gray-700">{description}</p>
         <div className="inline-flex items-center py-2 font-semibold text-center">
           <Link href={`/blogs/${id}`} className="inline-flex items-center py-2 font-semibold text-center">
-            Read More <Image src={assets.arrow} className="ml-2" alt="arrow" width={12} />
+            Read Mores <Image src={assets.arrow} className="ml-2" alt="arrow" width={12} />
           </Link>
         </div>
       </div>
