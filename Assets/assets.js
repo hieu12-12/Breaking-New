@@ -43,7 +43,7 @@ export const assets = {
     export const blog_data = [{
         id:1,
         title:"A detailed step by step guide to manage your lifestyle",
-        description:"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the..",
+        description:"Lorems Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the..",
         image:blog_pic_1,
         date:Date.now(),
         category:"Lifestyle",
