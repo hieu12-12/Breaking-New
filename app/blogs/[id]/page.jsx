@@ -9,14 +9,14 @@ const Page = ({ params }) => {
   const [data, setData] = useState(null);
 
   // Fetch blog data based on the params.id
-  const fetchBlogData = () => {
+  const fetchBlogData = async () => {
     const response = await axios.get('/api/blog',{
       params:{
         id:params.id
       }
     })
     setData(response.data);
-    }
+  }
   
 
   useEffect(() => {
