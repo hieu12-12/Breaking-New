@@ -10,15 +10,18 @@ const Page = ({ params }) => {
 
   // Fetch blog data based on the params.id
   const fetchBlogData = () => {
-    const blog = blog_data.find((item) => Number(params.id) === item.id);
-    if (blog) {
-      setData(blog);
+    const response = await axios.get('/api/blog',{
+      params:{
+        id:params.id
+      }
+    })
+    setData(response.data);
     }
-  };
+  
 
   useEffect(() => {
     fetchBlogData(); // Fetch blog data when component mounts or params.id changes
-  }, [params.id]);
+  }, []);
 
   return (
     <>

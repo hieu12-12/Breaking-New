@@ -1,18 +1,27 @@
 import {ConnectDB} from "@/lib/config/db"
-import BlogModelModel from "@/lib/models/BlogModel";
+import BlogModel from "@/lib/models/BlogModel";
 const { NextResponse } = require("next/server")
 import {writeFile} from 'fs/promises'
 const LoadDB = async () =>{
    await ConnectDB();
 }
 
+
 LoadDB();
+
 
 // API Endpoint to get all Blogs
 export async function GET(request){
    
-    const blogs = await BlogModel.find({}); 
-    return NextResponse.json({blogs})
+    const blogId = request.nextUrl.searchParams.get("id")
+    if(blogId) {
+        const blog = await BlogModel.findById(blogId);
+        return NextResponse.json(blog);
+    }
+    else{
+        const blogs = await BlogModel.find({}); 
+        return NextResponse.json({blogs})
+    }
 }
 
 // API Endpoint For Uploading Blogs
@@ -38,7 +47,7 @@ export async function POST(request){
         auhtorImg:`${formData.get('authorImg')}`
     
     }
-    await BlogModelModel.create(blogData);
+    await BlogModel.create(blogData);
     console.log("Blog Saved");
 
     return NextResponse.json({success:true,msg:"Blog Added"})
