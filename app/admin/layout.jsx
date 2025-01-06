@@ -2,6 +2,7 @@ import {assets} from "@/Assets/assets";
 import Sidebar from "@/Components/AdminComponents/Sidebar";
 import Image from "next/image";
 
+
 export default function Layout({children}){
     return (
         <>
