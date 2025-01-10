@@ -4,28 +4,43 @@ import Link from 'next/link'
 import React from 'react'
 
 const Sidebar = () => {
-    return (
-        <div className='flex flex-col bg-slate-100'>
-            <div className='px-2 sm:pl-14 py-3 border border-black'>
-                {/* Removed Logo here */}
-            </div>
-            <div className='w-28 sm:w-80 h-[100vh] relative py-12 border border-black'>
-                <div className='w-[50%] sm:w-[80%] absolute right-0'>
-                    <Link href='/admin/addBlog' className='flex items-center border border-black gap-3 font-medium px-3 py-2 bg-white shadow-[-5px_5px_0px_#000000]'>
-                        <Image src={assets.add_icon} alt='Add Blog' width={28} /><p className='hidden sm:inline-block'>Add blogs</p>
-                    </Link>
-                    <Link href='/admin/blogList' className=' mt-5 flex items-center border border-black gap-3 font-medium px-3 py-2 bg-white shadow-[-5px_5px_0px_#000000]'>
-                        <Image src={assets.blog_icon} alt='Blog List' width={28} /><p className='hidden sm:inline-block'>Blog lists</p>
-                    </Link>
-                    <Link href='/admin/subscriptions' className=' mt-5 flex items-center border border-black gap-3 font-medium px-3 py-2 bg-white shadow-[-5px_5px_0px_#000000]'>
-                        <Image src={assets.email_icon} alt='Subscriptions' width={28} /><p className='hidden sm:inline-block'>Subscriptions</p>
-                    </Link>
-                </div>
+  return (
+    <div className="flex flex-col bg-gradient-to-tl from-gray-800 to-gray-600 p-6 h-screen text-white">
+      <div className="mb-8">
+        {/* You can add logo or branding here */}
+        {/* Optional Space or Logo */}
+      </div>
+      
+      <div className="flex flex-col space-y-6">
+        <Link
+          href="/admin/addBlog"
+          className="flex items-center gap-4 p-4 rounded-lg bg-white text-gray-800 hover:bg-gray-200 transition-all ease-in-out shadow-lg"
+        >
+          <Image src={assets.add_icon} alt="Add Blog" width={30} height={30} />
+          <span className="text-md font-semibold">Add Blog</span>
+        </Link>
+        <Link
+          href="/admin/blogList"
+          className="flex items-center gap-4 p-4 rounded-lg bg-white text-gray-800 hover:bg-gray-200 transition-all ease-in-out shadow-lg"
+        >
+          <Image src={assets.blog_icon} alt="Blog List" width={30} height={30} />
+          <span className="text-md font-semibold">Blog List</span>
+        </Link>
+        <Link
+          href="/admin/subscriptions"
+          className="flex items-center gap-4 p-4 rounded-lg bg-white text-gray-800 hover:bg-gray-200 transition-all ease-in-out shadow-lg"
+        >
+          <Image src={assets.email_icon} alt="Subscriptions" width={30} height={30} />
+          <span className="text-md font-semibold">Subscriptions</span>
+        </Link>
+      </div>
 
-            </div>
-
-        </div>
-    )
+      <div className="mt-auto pt-6 text-center">
+        {/* Optional Footer or Legal Text */}
+        <p className="text-sm">Blogger Admin Panel</p>
+      </div>
+    </div>
+  )
 }
 
 export default Sidebar
