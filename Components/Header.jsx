@@ -3,6 +3,7 @@ import axios from 'axios';
 import Image from 'next/image';
 import React, { useState } from 'react';
 import { toast } from 'react-toastify';
+import Link from 'next/link'; // Import Link from Next.js
 
 const Header = () => {
 
@@ -24,16 +25,19 @@ const Header = () => {
   return (
     <div className="py-8 px-6 md:px-16 lg:px-32 bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600">
       <div className="flex justify-end items-center">
-        <button className="flex items-center gap-3 font-semibold py-3 px-6 border border-transparent bg-gradient-to-r from-teal-500 to-teal-700 text-white rounded-full shadow-lg hover:from-teal-700 hover:to-teal-500 transition duration-300">
-          Get Started <Image src={assets.arrow} alt="Arrow" />
-        </button>
+        {/* Wrap the button with Link to navigate to the AdminComponents folder */}
+        <Link href="/AdminComponents">
+          <button className="flex items-center gap-3 font-semibold py-3 px-6 border border-transparent bg-gradient-to-r from-teal-500 to-teal-700 text-white rounded-full shadow-lg hover:from-teal-700 hover:to-teal-500 transition duration-300">
+            Get Started <Image src={assets.arrow} alt="Arrow" />
+          </button>
+        </Link>
       </div>
       <div className="text-center mt-16">
         <h1 className="text-4xl sm:text-6xl font-extrabold text-white tracking-tight">
-          Latest Blogs
+          Breaking News
         </h1>
         <p className="mt-6 text-sm sm:text-base max-w-[740px] mx-auto text-gray-100 leading-relaxed">
-        "Breaking News: Top Stories You Can't Miss This Week".
+        "Top Stories You Can't Miss This Week".
         </p>
         <form onSubmit={onSubmitHandler} className="flex justify-between items-center max-w-[500px] sm:max-w-[600px] mx-auto mt-10 bg-white bg-opacity-80 rounded-xl shadow-2xl">
           <input 
