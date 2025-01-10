@@ -1,51 +1,52 @@
-'use client'
-import { assets } from '@/Assets/assets'
-import axios from 'axios'
-import Image from 'next/image'
-import React, { useState } from 'react'
-import { toast } from 'react-toastify'
+'use client';
+
+import { assets } from '@/Assets/assets';
+import axios from 'axios';
+import Image from 'next/image';
+import React, { useState } from 'react';
+import { toast } from 'react-toastify';
 
 const page = () => {
-  const [image, setImage] = useState(false)
+  const [image, setImage] = useState(false);
   const [data, setData] = useState({
     title: '',
     description: '',
     category: 'Startup',
-    author: 'Alex Bennett',
+    author: '',  // Make author initially empty so that the input can fill it
     authorImg: '/author_img.png',
-  })
+  });
 
   const onChangeHandler = (event) => {
-    const name = event.target.name
-    const value = event.target.value
-    setData((data) => ({ ...data, [name]: value }))
-  }
+    const name = event.target.name;
+    const value = event.target.value;
+    setData((data) => ({ ...data, [name]: value }));
+  };
 
   const onSubmitHandler = async (e) => {
-    e.preventDefault()
-    const formData = new FormData()
-    formData.append('title', data.title)
-    formData.append('description', data.description)
-    formData.append('category', data.category)
-    formData.append('author', data.author)
-    formData.append('authorImg', data.authorImg)
-    formData.append('image', image)
+    e.preventDefault();
+    const formData = new FormData();
+    formData.append('title', data.title);
+    formData.append('description', data.description);
+    formData.append('category', data.category);
+    formData.append('author', data.author); // Include author in formData
+    formData.append('authorImg', data.authorImg);
+    formData.append('image', image);
 
-    const response = await axios.post('/api/blog', formData)
+    const response = await axios.post('/api/blog', formData);
     if (response.data.success) {
-      toast.success(response.data.msg)
-      setImage(false)
+      toast.success(response.data.msg);
+      setImage(false);
       setData({
         title: '',
         description: '',
         category: 'Startup',
-        author: 'Alex Bennett',
+        author: '', // Reset author after submission
         authorImg: '/author_img.png',
-      })
+      });
     } else {
-      toast.error('Error')
+      toast.error('Error');
     }
-  }
+  };
 
   return (
     <>
@@ -113,6 +114,20 @@ const page = () => {
           </select>
         </div>
 
+        {/* Author Input Field */}
+        <div>
+          <p className="text-xl font-semibold text-gray-700">Author</p>
+          <input
+            name="author"
+            onChange={onChangeHandler}
+            value={data.author}
+            className="w-full sm:w-[500px] mt-4 px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-teal-500"
+            type="text"
+            placeholder="Enter author's name"
+            required
+          />
+        </div>
+
         <div className="text-center">
           <button
             type="submit"
@@ -123,7 +138,7 @@ const page = () => {
         </div>
       </form>
     </>
-  )
-}
+  );
+};
 
-export default page
+export default page;

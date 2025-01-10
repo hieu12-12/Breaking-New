@@ -46,29 +46,25 @@ const Page = ({ params }) => {
           
           {/* Wrap the button with Link to the admin page */}
           <Link href="/admin/addBlog">
-            <button className="flex items-center gap-3 font-semibold py-3 px-6 sm:py-4 sm:px-8 border border-transparent bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-full shadow-lg hover:from-purple-600 hover:to-blue-500 hover:shadow-xl transition-all duration-300 ease-in-out transform hover:-translate-y-1">
-              Get started <Image src={assets.arrow} alt="Arrow" />
+            <button className="flex items-center gap-3 font-semibold py-3 px-8 sm:py-4 sm:px-10 border border-transparent bg-gradient-to-r from-purple-600 to-teal-500 text-white rounded-full shadow-xl hover:opacity-90 hover:scale-105 transition-all duration-300 ease-in-out transform">
+              Add Blog
+              <Image src={assets.arrow} alt="Arrow" className="w-4 sm:w-5" />
             </button>
           </Link>
-
         </div>
       </header>
+
       <main>
         <section className="text-center my-20">
           <h1 className="text-3xl sm:text-5xl font-semibold max-w-[800px] mx-auto text-gray-900">
             {data.title}
           </h1>
-          <div className="mt-6 flex justify-center">
-            <Image
-              className="border-4 border-white rounded-full"
-              src={data.authorImg}
-              width={80}
-              height={80}
-              alt="Author"
-            />
-          </div>
-          <p className="mt-4 text-lg max-w-[800px] mx-auto text-gray-600">{data.author}</p>
+          {/* Styled Author Name with appealing colors */}
+          <p className="mt-4 text-xl max-w-[800px] mx-auto text-gray-800 font-semibold tracking-wide">
+            Written by <span className="text-gradient bg-clip-text text-transparent bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500">{data.author}</span>
+          </p>
         </section>
+
         <section className="mx-6 max-w-[850px] md:mx-auto mt-[-80px] mb-16">
           <Image
             className="w-full border-4 border-white shadow-lg"
@@ -95,6 +91,7 @@ const Page = ({ params }) => {
           </div>
         </section>
       </main>
+
       <Footer />
     </>
   );
