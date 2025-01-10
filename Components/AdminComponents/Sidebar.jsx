@@ -5,7 +5,7 @@ import React from 'react';
 
 const Sidebar = () => {
   return (
-    <div className="flex flex-col bg-gradient-to-b from-gray-700 via-gray-600 to-gray-500 text-white w-72 h-screen p-6 shadow-2xl">
+    <div className="flex flex-col bg-gradient-to-b from-gray-700 via-gray-600 to-gray-500 text-white w-72 h-[147vh] p-6 shadow-2xl">
       {/* Logo Section */}
       <div className="mb-10 flex justify-center">
         <Link href="/">

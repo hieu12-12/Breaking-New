@@ -50,7 +50,7 @@ export const assets = {
         image:blog_pic_1,
         date:Date.now(),
         category:"Lifestyle",
-        author:"Alex Bennett",
+        author:"Courtney McDonald",
         author_img:profile_icon
     },
     {
@@ -60,7 +60,7 @@ export const assets = {
         image:blog_pic_2,
         date:Date.now(),
         category:"Startup",
-        author:"Alex Bennett",
+        author:"Hon Chau",
         author_img:profile_icon
     },
     {
@@ -70,7 +70,7 @@ export const assets = {
         image:blog_pic_3,
         date:Date.now(),
         category:"Technology",
-        author:"Alex Bennett",
+        author:"Hieu Tran",
         author_img:profile_icon
     },
     {
