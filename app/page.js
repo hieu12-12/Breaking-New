@@ -10,7 +10,7 @@ export default function Home() {
     <>
       <ToastContainer theme="dark"/>
       <Header/>
-      <BlogList/>
+      <BlogLists/>
       <Footer/>
     </>
   )
