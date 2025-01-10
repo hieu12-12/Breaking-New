@@ -10,18 +10,34 @@ const page = ({ params }) => {
 
   const [data, setData] = useState(null);
 
+<<<<<<< HEAD
   const fetchBlogData = async () => {
     const response = await axios.get('/api/blog', {
       params: {
         id: params.id
+=======
+  // Fetch blog data based on the params.id
+  const fetchBlogData = async () => {
+    const response = await axios.get('/api/blog',{
+      params:{
+        id:params.id
+>>>>>>> 34483341b095050da353f06f14c3dc634a172a0b
       }
     })
     setData(response.data);
   }
+<<<<<<< HEAD
 
   useEffect(() => {
     fetchBlogData();
   }, [])
+=======
+  
+
+  useEffect(() => {
+    fetchBlogData(); // Fetch blog data when component mounts or params.id changes
+  }, []);
+>>>>>>> 34483341b095050da353f06f14c3dc634a172a0b
 
   return (data ? <>
     <div className='bg-gray-200 py-5 px-5 md:px-12 lg:px-28'>
