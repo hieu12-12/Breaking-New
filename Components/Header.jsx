@@ -25,8 +25,8 @@ const Header = () => {
   return (
     <div className="py-8 px-6 md:px-16 lg:px-32 bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600">
       <div className="flex justify-end items-center">
-        {/* Wrap the button with Link to navigate to the AdminComponents folder */}
-        <Link href="/AdminComponents">
+        {/* Update the Link to point to the correct route */}
+        <Link href="/admin/addBlog">
           <button className="flex items-center gap-3 font-semibold py-3 px-6 border border-transparent bg-gradient-to-r from-teal-500 to-teal-700 text-white rounded-full shadow-lg hover:from-teal-700 hover:to-teal-500 transition duration-300">
             Get Started <Image src={assets.arrow} alt="Arrow" />
           </button>
