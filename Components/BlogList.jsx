@@ -52,7 +52,7 @@ const BlogList = () => {
       </div>
       
       <div className="flex flex-wrap justify-center gap-6 xl:gap-12 mb-16">
-        {blog_data
+        {blogs
           .filter(item => menu === "All" ? true : item.category === menu)
           .map((item, index) => (
             <BlogItem
