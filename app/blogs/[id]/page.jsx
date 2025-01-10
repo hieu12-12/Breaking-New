@@ -4,7 +4,7 @@ import { assets } from '@/Assets/assets';
 import Footer from '@/Components/Footer';
 import axios from 'axios';
 import Image from 'next/image';
-import Link from 'next/link';
+import Link from 'next/link'; // Import Link from Next.js
 import React, { useEffect, useState } from 'react';
 
 const Page = ({ params }) => {
@@ -44,9 +44,12 @@ const Page = ({ params }) => {
             <Image src={assets.logo} width={180} alt="Logo" className="w-[130px] sm:w-auto" />
           </Link>
           
-          <button className="flex items-center gap-3 font-semibold py-3 px-6 sm:py-4 sm:px-8 border border-transparent bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-full shadow-lg hover:from-purple-600 hover:to-blue-500 hover:shadow-xl transition-all duration-300 ease-in-out transform hover:-translate-y-1">
-            Get started <Image src={assets.arrow} alt="Arrow" />
-          </button>
+          {/* Wrap the button with Link to the admin page */}
+          <Link href="/admin/addBlog">
+            <button className="flex items-center gap-3 font-semibold py-3 px-6 sm:py-4 sm:px-8 border border-transparent bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-full shadow-lg hover:from-purple-600 hover:to-blue-500 hover:shadow-xl transition-all duration-300 ease-in-out transform hover:-translate-y-1">
+              Get started <Image src={assets.arrow} alt="Arrow" />
+            </button>
+          </Link>
 
         </div>
       </header>
@@ -81,7 +84,7 @@ const Page = ({ params }) => {
           <div className="my-20">
             <p className="text-black font-semibold my-6">Share this article on social media</p>
             <div className="flex space-x-6">
-              {[
+              {[ 
                 { icon: assets.facebook_icon, alt: 'Facebook' },
                 { icon: assets.twitter_icon, alt: 'Twitter' },
                 { icon: assets.googleplus_icon, alt: 'Google+' },
