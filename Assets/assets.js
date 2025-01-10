@@ -14,6 +14,7 @@ import blog_pic_13 from './blog_pic_13.png';
 import blog_pic_14 from './blog_pic_14.png';
 import blog_pic_15 from './blog_pic_15.png';
 import blog_pic_16 from './blog_pic_16.png';
+import breakingnews from './breakingnews.png'
 import facebook_icon from './facebook_icon.png'
 import googleplus_icon from './googleplus_icon.png'
 import twitter_icon from './twitter_icon.png'
@@ -26,6 +27,7 @@ import add_icon from './add_icon.png'
 import email_icon from './email_icon.png'
 import upload_area from './upload_area.png'
 
+
 export const assets = {
     facebook_icon,
     googleplus_icon,
@@ -33,6 +35,7 @@ export const assets = {
     profile_icon,
     logo,
     arrow,
+    breakingnews,
     logo_light,
     blog_icon,
     add_icon,

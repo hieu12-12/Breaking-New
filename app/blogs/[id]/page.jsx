@@ -41,7 +41,7 @@ const Page = ({ params }) => {
       <header className="bg-gray-200 py-6 px-6 md:px-14 lg:px-32">
         <div className="flex justify-between items-center">
           <Link href="/">
-            <Image src={assets.logo} width={180} alt="Logo" className="w-[130px] sm:w-auto" />
+            <Image src={assets.breakingnews} width={180} alt="Logo" className="w-[130px] sm:w-auto" />
           </Link>
           
           {/* Wrap the button with Link to the admin page */}
