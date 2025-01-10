@@ -6,20 +6,47 @@ import Image from 'next/image';
 import React, { useState } from 'react';
 import { toast } from 'react-toastify';
 
+// Reusable FormInput component
+const FormInput = ({ label, name, value, onChange, type = 'text', placeholder, required, rows }) => (
+  <div className="mb-6">
+    <label className="block text-lg font-medium text-gray-700 mb-2">{label}</label>
+    {type === 'textarea' ? (
+      <textarea
+        name={name}
+        onChange={onChange}
+        value={value}
+        className="w-full sm:w-[580px] mt-2 p-4 border border-gray-300 rounded-lg shadow-md focus:ring-2 focus:ring-teal-500 focus:outline-none resize-none"
+        placeholder={placeholder}
+        rows={rows}
+        required={required}
+      />
+    ) : (
+      <input
+        name={name}
+        onChange={onChange}
+        value={value}
+        className="w-full sm:w-[300px] mt-2 p-4 border border-gray-300 rounded-lg shadow-md focus:ring-2 focus:ring-teal-500 focus:outline-none" // Reduced width to 300px here
+        type={type}
+        placeholder={placeholder}
+        required={required}
+      />
+    )}
+  </div>
+);
+
 const page = () => {
-  const [image, setImage] = useState(false);
+  const [image, setImage] = useState(null);
   const [data, setData] = useState({
     title: '',
     description: '',
     category: 'Startup',
-    author: '',  // Make author initially empty so that the input can fill it
+    author: '',
     authorImg: '/author_img.png',
   });
 
   const onChangeHandler = (event) => {
-    const name = event.target.name;
-    const value = event.target.value;
-    setData((data) => ({ ...data, [name]: value }));
+    const { name, value } = event.target;
+    setData((prev) => ({ ...prev, [name]: value }));
   };
 
   const onSubmitHandler = async (e) => {
@@ -28,19 +55,19 @@ const page = () => {
     formData.append('title', data.title);
     formData.append('description', data.description);
     formData.append('category', data.category);
-    formData.append('author', data.author); // Include author in formData
+    formData.append('author', data.author);
     formData.append('authorImg', data.authorImg);
     formData.append('image', image);
 
     const response = await axios.post('/api/blog', formData);
     if (response.data.success) {
       toast.success(response.data.msg);
-      setImage(false);
+      setImage(null);
       setData({
         title: '',
         description: '',
         category: 'Startup',
-        author: '', // Reset author after submission
+        author: '',
         authorImg: '/author_img.png',
       });
     } else {
@@ -49,95 +76,70 @@ const page = () => {
   };
 
   return (
-    <>
-      <form
-        onSubmit={onSubmitHandler}
-        className="pt-5 px-5 sm:pt-12 sm:pl-16 space-y-6 max-w-2xl mx-auto"
-      >
-        <p className="text-xl font-semibold text-gray-700">Upload Thumbnail</p>
-        <label htmlFor="image" className="cursor-pointer">
-          <div className="mt-4 relative w-full h-36 border-dashed border-2 border-gray-400 rounded-lg flex justify-center items-center">
-            <Image
-              className="rounded-lg"
-              src={!image ? assets.upload_area : URL.createObjectURL(image)}
-              width={140}
-              height={70}
-              alt="Upload Area"
-            />
+    <div className="bg-gray-100 py-16 sm:py-24">
+      <form onSubmit={onSubmitHandler} className="bg-white p-8 max-w-3xl mx-auto rounded-lg shadow-lg space-y-6">
+        {/* Thumbnail Upload */}
+        <div className="mb-8">
+          <p className="text-lg font-semibold text-gray-700 mb-4">Upload Thumbnail</p>
+          <label htmlFor="image" className="cursor-pointer">
+            <div className="w-full h-40 border-2 border-dashed border-gray-300 rounded-lg flex justify-center items-center hover:border-teal-500 transition duration-300">
+              <Image
+                className="rounded-lg"
+                src={!image ? assets.upload_area : URL.createObjectURL(image)}
+                width={160}
+                height={80}
+                alt="Upload Area"
+              />
+            </div>
+          </label>
+          <input
+            onChange={(e) => setImage(e.target.files[0])}
+            type="file"
+            id="image"
+            hidden
+            required
+          />
+        </div>
+
+        {/* Form Fields */}
+        <div className="space-y-6">
+          <div className="flex flex-col sm:flex-row sm:space-x-8">
+            <div className="flex-1">
+              <FormInput label="Blog Title" name="title" value={data.title} onChange={onChangeHandler} placeholder="Enter blog title" required />
+            </div>
+            <div className="flex-1">
+              <FormInput label="Author" name="author" value={data.author} onChange={onChangeHandler} placeholder="Enter author's name" required />
+            </div>
           </div>
-        </label>
-        <input
-          onChange={(e) => setImage(e.target.files[0])}
-          type="file"
-          id="image"
-          hidden
-          required
-        />
 
-        <div>
-          <p className="text-xl font-semibold text-gray-700">Blog Title</p>
-          <input
-            name="title"
-            onChange={onChangeHandler}
-            value={data.title}
-            className="w-full sm:w-[500px] mt-4 px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-teal-500"
-            type="text"
-            placeholder="Enter blog title"
-            required
-          />
-        </div>
+          <FormInput label="Blog Description" name="description" value={data.description} onChange={onChangeHandler} type="textarea" placeholder="Write content here" rows={6} required />
 
-        <div>
-          <p className="text-xl font-semibold text-gray-700">Blog Description</p>
-          <textarea
-            name="description"
-            onChange={onChangeHandler}
-            value={data.description}
-            className="w-full sm:w-[500px] mt-4 px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-teal-500"
-            placeholder="Write content here"
-            rows={6}
-            required
-          />
-        </div>
+          <div className="mb-6">
+            <label className="block text-lg font-medium text-gray-700 mb-2">Blog Category</label>
+            <select
+              name="category"
+              onChange={onChangeHandler}
+              value={data.category}
+              className="w-full sm:w-[580px] mt-2 p-4 border border-gray-300 rounded-lg text-gray-600 focus:ring-2 focus:ring-teal-500 focus:outline-none"
+            >
+              <option value="Startup">Startup</option>
+              <option value="Technology">Technology</option>
+              <option value="Lifestyle">Lifestyle</option>
+            </select>
+          </div>
 
-        <div>
-          <p className="text-xl font-semibold text-gray-700">Blog Category</p>
-          <select
-            name="category"
-            onChange={onChangeHandler}
-            value={data.category}
-            className="w-40 mt-4 px-4 py-3 border border-gray-300 rounded-lg text-gray-500 focus:outline-none focus:ring-2 focus:ring-teal-500"
-          >
-            <option value="Startup">Startup</option>
-            <option value="Technology">Technology</option>
-            <option value="Lifestyle">Lifestyle</option>
-          </select>
-        </div>
-
-        {/* Author Input Field */}
-        <div>
-          <p className="text-xl font-semibold text-gray-700">Author</p>
-          <input
-            name="author"
-            onChange={onChangeHandler}
-            value={data.author}
-            className="w-full sm:w-[500px] mt-4 px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-teal-500"
-            type="text"
-            placeholder="Enter author's name"
-            required
-          />
-        </div>
-
-        <div className="text-center">
-          <button
-            type="submit"
-            className="mt-8 w-40 h-12 bg-teal-600 text-white font-semibold rounded-lg shadow-md hover:bg-teal-700 transition duration-300"
-          >
-            ADD
-          </button>
+          {/* Submit Button */}
+          <div className="text-center mt-8">
+            <button
+              type="submit"
+              className="w-40 h-12 bg-teal-600 text-white font-semibold rounded-lg shadow-md hover:bg-teal-700 transition duration-300"
+            >
+              ADD
+            </button>
+          </div>
         </div>
       </form>
-    </>
+    </div>
   );
 };
 
