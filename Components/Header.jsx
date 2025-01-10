@@ -1,43 +1,58 @@
-import { assets } from '@/Assets/assets'
+import { assets } from '@/Assets/assets';
 import axios from 'axios';
-import Image from 'next/image'
-import React, { useState } from 'react'
+import Image from 'next/image';
+import React, { useState } from 'react';
 import { toast } from 'react-toastify';
 
 const Header = () => {
 
-  const [email,setEmail] = useState("");
+  const [email, setEmail] = useState("");
 
-  const onSubmitHandler = async (e) =>{
+  const onSubmitHandler = async (e) => {
     e.preventDefault();
     const formData = new FormData();
-    formData.append("email",email);
-    const response = await axios.post('/api/email',formData);
+    formData.append("email", email);
+    const response = await axios.post('/api/email', formData);
     if (response.data.success) {
       toast.success(response.data.msg);
       setEmail("");
+    } else {
+      toast.error("Error");
     }
-    else{
-      toast.error("Error")
-    }
-  }
+  };
 
   return (
-    <div className='py-5 px-5 md:px-12 lg:px-28'>
-      <div className='flex justify-between items-center'>
-        <Image src={assets.logo} width={180} alt='' className='w-[130px] sm:w-auto'/>
-        <button className='flex items-center gap-2 font-medium py-1 px-3 sm:py-3 sm:px-6 border border-solid border-black shadow-[-7px_7px_0px_#000000]'>Get started <Image src={assets.arrow} /></button>
+    <div className="py-8 px-6 md:px-16 lg:px-32 bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600">
+      <div className="flex justify-end items-center">
+        <button className="flex items-center gap-3 font-semibold py-3 px-6 border border-transparent bg-gradient-to-r from-teal-500 to-teal-700 text-white rounded-full shadow-lg hover:from-teal-700 hover:to-teal-500 transition duration-300">
+          Get Started <Image src={assets.arrow} alt="Arrow" />
+        </button>
       </div>
-      <div className='text-center my-8'>
-        <h1 className='text-3xl sm:text-5xl font-medium'>Latest Blogs</h1>
-        <p className='mt-10 max-w-[740px] m-auto text-xs sm:text-base'>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever.</p>
-        <form onSubmit={onSubmitHandler} className='flex justify-between max-w-[500px] scale-75 sm:scale-100 mx-auto mt-10 border border-black shadow-[-7px_7px_0px_#000000]' action="">
-            <input onChange={(e)=>setEmail(e.target.value)} value={email} type="email" placeholder='Enter your email' className='pl-4 outline-none' required />
-            <button type='submit' className='border-l border-black py-4 px-4 sm:px-8 active:bg-gray-600 active:text-white'>Subscribe</button>
+      <div className="text-center mt-16">
+        <h1 className="text-4xl sm:text-6xl font-extrabold text-white tracking-tight">
+          Latest Blogs
+        </h1>
+        <p className="mt-6 text-sm sm:text-base max-w-[740px] mx-auto text-gray-100 leading-relaxed">
+          Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever.
+        </p>
+        <form onSubmit={onSubmitHandler} className="flex justify-between items-center max-w-[500px] sm:max-w-[600px] mx-auto mt-10 bg-white bg-opacity-80 rounded-xl shadow-2xl">
+          <input 
+            onChange={(e) => setEmail(e.target.value)} 
+            value={email} 
+            type="email" 
+            placeholder="Enter your email" 
+            className="pl-4 py-3 outline-none w-full text-gray-800 rounded-l-xl focus:ring-2 focus:ring-teal-400 transition duration-300"
+            required 
+          />
+          <button 
+            type="submit" 
+            className="bg-teal-600 text-white py-3 px-6 sm:px-10 rounded-r-xl hover:bg-teal-700 active:bg-teal-500 transition duration-300">
+            Subscribe
+          </button>
         </form>
       </div>
     </div>
-  )
+  );
 }
 
-export default Header
+export default Header;
