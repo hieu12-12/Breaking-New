@@ -122,7 +122,7 @@ const page = () => {
               value={data.category}
               className="w-full sm:w-[580px] mt-2 p-4 border border-gray-300 rounded-lg text-gray-600 focus:ring-2 focus:ring-teal-500 focus:outline-none"
             >
-              <option value="Startup">Startup</option>
+              <option value="Startup">Sports</option>
               <option value="Technology">Technology</option>
               <option value="Lifestyle">Lifestyle</option>
             </select>

@@ -10,11 +10,11 @@ const Sidebar = () => {
       <div className="mb-10 flex justify-center">
         <Link href="/">
           <Image
-            src={assets.logo}
+            src={assets.breakingnews}
             alt="Admin Logo"
             width={140}
             height={50}
-            className="opacity-90 hover:opacity-100 transition duration-300"
+            className="opacity-90 hover:opacity-40 transition duration-300"
           />
         </Link>
       </div>
