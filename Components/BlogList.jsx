@@ -36,9 +36,9 @@ const BlogList = () => {
           Technology
         </button>
         <button
-          onClick={() => setMenu('Startup')}
+          onClick={() => setMenu('Sports')}
           className={`${
-            menu === "Startup" ? 'bg-teal-600 text-white' : 'text-gray-800'
+            menu === "Sports" ? 'bg-teal-600 text-white' : 'text-gray-800'
           } py-2 px-6 rounded-md font-semibold hover:bg-teal-700 transition-colors duration-300`}>
           Sports
         </button>
