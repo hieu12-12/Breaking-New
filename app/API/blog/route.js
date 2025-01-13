@@ -47,7 +47,6 @@ export async function POST(request) {
     image: `${imgUrl}`,
     authorImg: `${formData.get('authorImg')}`
   }
-  console.log(blogs);
 
   await BlogModel.create(blogData);
   console.log("Blog Saved");
