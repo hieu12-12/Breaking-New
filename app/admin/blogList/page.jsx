@@ -58,7 +58,6 @@ const Page = () => {
                 mongoId={item._id}
                 title={item.title}
                 author={item.author}
-                authorImg={item.authorImg}
                 date={item.date}
                 deleteBlog={deleteBlog}
               />

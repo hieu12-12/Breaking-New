@@ -11,8 +11,8 @@ const page = () => {
             title:"",
             description:"",
             category:"Startup",
-            Author:"Alex Bennett",
-            authorImg:"/author_img.png"
+            Author:"Hieu Tran",
+            
         })
 
         const onChangeHandler = (event) => {
@@ -40,7 +40,7 @@ const page = () => {
                     description:"",
                     category:"Startup",
                     Author:"",
-                    authorImg:"/author_img.png"
+                    
                 });
             }
             else{

@@ -10,7 +10,7 @@ async function listCollections() {
         await client.connect();
 
         // Access the database
-        const db = client.db("breaking-new"); // Replace with your database name
+        const db = client.db("breaking-new"); // database name
 
         // List all collections
         const collections = await db.listCollections().toArray();
