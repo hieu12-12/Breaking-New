@@ -12,7 +12,7 @@ const page = () => {
             description:"",
             category:"Startup",
             Author:"Hieu Tran",
-            
+            authorImg:"/author_img.png"
         })
 
         const onChangeHandler = (event) => {
