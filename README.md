@@ -16,6 +16,7 @@
 Clone the repository: https://github.com/hieu12-12/Breaking-New.git
 Navigate to the project directory: cd Breaking-New
 Install dependencies: npm install 
+install dependencies: npm i next@latest
 Run the development server: npm run dev
 Access the website in your browser: http://localhost:3000 or  http://192.168.0.16:300
 
