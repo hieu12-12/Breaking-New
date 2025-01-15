@@ -6,7 +6,7 @@ import axios from 'axios'; // For making HTTP requests
 import React, { useEffect, useState } from 'react'; // React hooks for state management and lifecycle methods
 import { toast } from 'react-toastify'; // For displaying notifications
 
-const page = () => {
+const Page = () => {
   // State to store the list of email subscriptions fetched from the server
   const [emails, setEmails] = useState([]);
 
@@ -80,4 +80,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;

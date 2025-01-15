@@ -36,7 +36,7 @@ const FormInput = ({ label, name, value, onChange, type = 'text', placeholder, r
 );
 
 // Main page component
-const page = () => {
+const Page = () => {
   // States for managing form data and image upload
   const [image, setImage] = useState(null); // For storing the uploaded image file
   const [data, setData] = useState({
@@ -154,4 +154,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;
