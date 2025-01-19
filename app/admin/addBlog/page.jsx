@@ -34,13 +34,7 @@ const FormInput = ({ label, name, value, onChange, type = 'text', placeholder, r
   </div>
 );
 
-<<<<<<< HEAD
 const Page = () => {
-=======
-// Main page component
-const Page = () => {
-  // States for managing form data and image upload
->>>>>>> 5eb9066096f3d40af27b40a8a4fe1a20c9df4adc
   const [image, setImage] = useState(null); // For storing the uploaded image file
   const [loading, setLoading] = useState(false); // For handling form submission state
   const [data, setData] = useState({
