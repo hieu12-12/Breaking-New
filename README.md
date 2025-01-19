@@ -4,21 +4,18 @@
 
 - The website aims to provide a streamlined and user-friendly platform for accessing news articles and blogs, categorized into clearly defined sections for ease of navigation. Traditional news platforms can often feel cluttered, overwhelming users with unrelated content or disorganized layouts. By introducing a categorized approach, this website enhances the reading experience by allowing users to quickly find content relevant to their interests without unnecessary distractions. It solves the problem of information overload and promotes organized consumption of news, empowering readers to stay informed in an efficient and focused manner.
 
-## Table of contents
 
-- [Installation](#installation 14)
-- [Usage](#usage 22)
-- [Credits](#credits 40)
-- [License](#license 47)
+## Table of Contents
+1. [Installation](#installation)
+2. [Usage](*Usage)
+3. [Credit](#credit)
+4. [License](#license)
+5. [Feature](#Feature)
 
 ## Installation
 
-Clone the repository: https://github.com/hieu12-12/Breaking-New.git
-Navigate to the project directory: cd Breaking-New
-Install dependencies: npm install 
-install dependencies: npm i next@latest
-Run the development server: npm run dev
-Access the website in your browser: http://localhost:3000 or  http://192.168.0.16:300
+Clone the repository: https://github.com/hieu12-12/Breaking-New.git Navigate to the project directory: cd Breaking-New Install dependencies: npm install install dependencies: npm i next@latest Run the development server: npm run dev Access the website in your browser: http://localhost:3000 or http://192.168.0.16:300
+
 
 ## Usage
 
@@ -45,6 +42,8 @@ Name: Hieu Tran; Github: hieu12-12
 Name: Courtney McDonald; Github: courtneymcd
 Name: Crystal Shaw; Github: Dolo-devs
 
+Presentation link: https://docs.google.com/presentation/d/1zNhDVZwjvCLcWzqCJCI3eoHbvMXpPI3nAXVu3gDpCK4/edit#slide=id.g29f43f0a72_0_0
+
 ## License
 
 MIT License
@@ -68,9 +67,6 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
-
-## Badges
-
 
 
 ## Features

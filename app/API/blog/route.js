@@ -47,6 +47,7 @@ export async function POST(request) {
     image: `${imgUrl}`,
     authorImg: `${formData.get('authorImg')}`
   }
+  console.log(blogs);
 
   await BlogModel.create(blogData);
   console.log("Blog Saved");
@@ -61,5 +62,5 @@ export async function DELETE(request) {
   const blog = await BlogModel.findById(id);
   fs.unlink(`./public${blog.image}`, () => { });
   await BlogModel.findByIdAndDelete(id);
-  return NextResponse.json({ msg: "Blog Deleted" });
+  return NextResponse.json({ msg: "Blogs Deleted" });
 }
