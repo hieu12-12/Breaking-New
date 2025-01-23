@@ -1,10 +1,9 @@
 'use client'; // Enables client-side rendering for this component
 
-// Importing necessary dependencies and assets
 import { assets } from '@/Assets/assets'; // Custom assets module
 import axios from 'axios'; // For making HTTP requests
 import Image from 'next/image'; // For optimized image rendering in Next.js
-import React, { useState } from 'react'; // React for state and component rendering
+import React, { useState, useEffect } from 'react'; // React for state and component rendering
 import { toast } from 'react-toastify'; // For toast notifications
 
 // Reusable FormInput component: Simplifies input field creation
@@ -35,17 +34,25 @@ const FormInput = ({ label, name, value, onChange, type = 'text', placeholder, r
   </div>
 );
 
-// Main page component
 const Page = () => {
-  // States for managing form data and image upload
   const [image, setImage] = useState(null); // For storing the uploaded image file
+  const [loading, setLoading] = useState(false); // For handling form submission state
   const [data, setData] = useState({
-    title: '', // Blog title
-    description: '', // Blog description
-    category: 'Startup', // Default category
-    author: '', // Author's name
-    authorImg: '', // Default author image
+    title: '',
+    description: '',
+    category: 'Startup',
+    author: '',
+    authorImg: '/author_img.png',
   });
+
+  // Cleanup the object URL when the image changes or component unmounts
+  useEffect(() => {
+    return () => {
+      if (image) {
+        URL.revokeObjectURL(image.preview);
+      }
+    };
+  }, [image]);
 
   // Updates form state when input changes
   const onChangeHandler = (event) => {
@@ -55,32 +62,37 @@ const Page = () => {
 
   // Handles form submission
   const onSubmitHandler = async (e) => {
-    e.preventDefault(); // Prevents default form submission behavior
-    const formData = new FormData(); // For sending form data including files
-    formData.append('title', data.title);
-    formData.append('description', data.description);
-    formData.append('category', data.category);
-    formData.append('author', data.author);
-    formData.append('authorImg', data.authorImg);
-    formData.append('image', image); // Appends image file
+    e.preventDefault();
+    setLoading(true);
 
-    // Sends data to the backend API
-    const response = await axios.post('/api/blog', formData);
-    if (response.data.success) {
-      // Displays success notification
-      toast.success(response.data.msg);
-      // Resets form fields
-      setImage(null);
-      setData({
-        title: '',
-        description: '',
-        category: 'Startup',
-        author: '',
-        authorImg: '/author_img.png',
-      });
-    } else {
-      // Displays error notification
-      toast.error('Error');
+    try {
+      const formData = new FormData();
+      formData.append('title', data.title);
+      formData.append('description', data.description);
+      formData.append('category', data.category);
+      formData.append('author', data.author);
+      formData.append('authorImg', data.authorImg);
+      formData.append('image', image);
+
+      const response = await axios.post('/api/blog', formData);
+      if (response.data.success) {
+        toast.success(response.data.msg);
+        setImage(null);
+        setData({
+          title: '',
+          description: '',
+          category: 'Startup',
+          author: '',
+          authorImg: '/author_img.png',
+        });
+      } else {
+        throw new Error(response.data.msg || 'Unknown error occurred');
+      }
+    } catch (error) {
+      console.error(error);
+      toast.error(error.response?.data?.error || 'Failed to add blog');
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -90,15 +102,18 @@ const Page = () => {
         {/* Thumbnail Upload Section */}
         <div className="mb-8">
           <p className="text-lg font-semibold text-gray-700 mb-4">Upload Thumbnail</p>
-          <label htmlFor="image" className="cursor-pointer">
-            <div className="w-full h-40 border-2 border-dashed border-gray-300 rounded-lg flex justify-center items-center hover:border-teal-500 transition duration-300">
-              {/* Displays a preview or placeholder image */}
+          <label htmlFor="image" className="cursor-pointer" aria-label="Upload Thumbnail">
+            <div
+              className="w-full h-40 border-2 border-dashed border-gray-300 rounded-lg flex justify-center items-center hover:border-teal-500 transition duration-300"
+              role="button"
+              aria-describedby="image-upload"
+            >
               <Image
                 className="rounded-lg"
                 src={!image ? assets.upload_area : URL.createObjectURL(image)}
                 width={160}
                 height={80}
-                alt="Upload Area"
+                alt="Upload Thumbnail"
               />
             </div>
           </label>
@@ -108,6 +123,7 @@ const Page = () => {
             id="image"
             hidden
             required
+            aria-required="true"
           />
         </div>
 
@@ -122,7 +138,16 @@ const Page = () => {
             </div>
           </div>
 
-          <FormInput label="Blog Description" name="description" value={data.description} onChange={onChangeHandler} type="textarea" placeholder="Write content here" rows={6} required />
+          <FormInput
+            label="Blog Description"
+            name="description"
+            value={data.description}
+            onChange={onChangeHandler}
+            type="textarea"
+            placeholder="Write content here"
+            rows={6}
+            required
+          />
 
           {/* Dropdown for Blog Category */}
           <div className="mb-6">
@@ -133,7 +158,7 @@ const Page = () => {
               value={data.category}
               className="w-full sm:w-[580px] mt-2 p-4 border border-gray-300 rounded-lg text-gray-600 focus:ring-2 focus:ring-teal-500 focus:outline-none"
             >
-              <option value="Startup">Sports</option>
+              <option value="Sports">Sports</option>
               <option value="Technology">Technology</option>
               <option value="Lifestyle">Lifestyle</option>
             </select>
@@ -143,9 +168,10 @@ const Page = () => {
           <div className="text-center mt-8">
             <button
               type="submit"
-              className="w-40 h-12 bg-teal-600 text-white font-semibold rounded-lg shadow-md hover:bg-teal-700 transition duration-300"
+              className={`w-40 h-12 ${loading ? 'bg-gray-400' : 'bg-teal-600'} text-white font-semibold rounded-lg shadow-md transition duration-300`}
+              disabled={loading}
             >
-              ADD
+              {loading ? 'Submitting...' : 'ADD'}
             </button>
           </div>
         </div>
